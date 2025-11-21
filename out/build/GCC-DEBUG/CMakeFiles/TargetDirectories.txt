@@ -1,0 +1,3 @@
+/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles/Calculator.dir
+/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles/edit_cache.dir
+/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles/rebuild_cache.dir
