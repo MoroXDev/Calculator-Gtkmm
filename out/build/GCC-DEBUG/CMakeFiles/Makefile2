@@ -85,12 +85,12 @@ clean: CMakeFiles/Calculator.dir/clean
 CMakeFiles/Calculator.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Calculator.dir/build.make CMakeFiles/Calculator.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Calculator.dir/build.make CMakeFiles/Calculator.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=1,2 "Built target Calculator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=1,2,3 "Built target Calculator"
 .PHONY : CMakeFiles/Calculator.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Calculator.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Calculator.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles 0
 .PHONY : CMakeFiles/Calculator.dir/rule
@@ -102,7 +102,7 @@ Calculator: CMakeFiles/Calculator.dir/rule
 # codegen rule for target.
 CMakeFiles/Calculator.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Calculator.dir/build.make CMakeFiles/Calculator.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=1,2 "Finished codegen for target Calculator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=1,2,3 "Finished codegen for target Calculator"
 .PHONY : CMakeFiles/Calculator.dir/codegen
 
 # clean rule for target.

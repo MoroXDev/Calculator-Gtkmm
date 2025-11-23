@@ -72,32 +72,48 @@ include CMakeFiles/Calculator.dir/flags.make
 CMakeFiles/Calculator.dir/codegen:
 .PHONY : CMakeFiles/Calculator.dir/codegen
 
-CMakeFiles/Calculator.dir/main.cpp.o: CMakeFiles/Calculator.dir/flags.make
-CMakeFiles/Calculator.dir/main.cpp.o: /home/kosmo/Pulpit/Calculator-Gtkmm/main.cpp
-CMakeFiles/Calculator.dir/main.cpp.o: CMakeFiles/Calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Calculator.dir/main.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Calculator.dir/main.cpp.o -MF CMakeFiles/Calculator.dir/main.cpp.o.d -o CMakeFiles/Calculator.dir/main.cpp.o -c /home/kosmo/Pulpit/Calculator-Gtkmm/main.cpp
+CMakeFiles/Calculator.dir/src/main.cpp.o: CMakeFiles/Calculator.dir/flags.make
+CMakeFiles/Calculator.dir/src/main.cpp.o: /home/kosmo/Pulpit/Calculator-Gtkmm/src/main.cpp
+CMakeFiles/Calculator.dir/src/main.cpp.o: CMakeFiles/Calculator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Calculator.dir/src/main.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Calculator.dir/src/main.cpp.o -MF CMakeFiles/Calculator.dir/src/main.cpp.o.d -o CMakeFiles/Calculator.dir/src/main.cpp.o -c /home/kosmo/Pulpit/Calculator-Gtkmm/src/main.cpp
 
-CMakeFiles/Calculator.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Calculator.dir/main.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kosmo/Pulpit/Calculator-Gtkmm/main.cpp > CMakeFiles/Calculator.dir/main.cpp.i
+CMakeFiles/Calculator.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Calculator.dir/src/main.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kosmo/Pulpit/Calculator-Gtkmm/src/main.cpp > CMakeFiles/Calculator.dir/src/main.cpp.i
 
-CMakeFiles/Calculator.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Calculator.dir/main.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kosmo/Pulpit/Calculator-Gtkmm/main.cpp -o CMakeFiles/Calculator.dir/main.cpp.s
+CMakeFiles/Calculator.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Calculator.dir/src/main.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kosmo/Pulpit/Calculator-Gtkmm/src/main.cpp -o CMakeFiles/Calculator.dir/src/main.cpp.s
+
+CMakeFiles/Calculator.dir/src/window.cpp.o: CMakeFiles/Calculator.dir/flags.make
+CMakeFiles/Calculator.dir/src/window.cpp.o: /home/kosmo/Pulpit/Calculator-Gtkmm/src/window.cpp
+CMakeFiles/Calculator.dir/src/window.cpp.o: CMakeFiles/Calculator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Calculator.dir/src/window.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Calculator.dir/src/window.cpp.o -MF CMakeFiles/Calculator.dir/src/window.cpp.o.d -o CMakeFiles/Calculator.dir/src/window.cpp.o -c /home/kosmo/Pulpit/Calculator-Gtkmm/src/window.cpp
+
+CMakeFiles/Calculator.dir/src/window.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Calculator.dir/src/window.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kosmo/Pulpit/Calculator-Gtkmm/src/window.cpp > CMakeFiles/Calculator.dir/src/window.cpp.i
+
+CMakeFiles/Calculator.dir/src/window.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Calculator.dir/src/window.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kosmo/Pulpit/Calculator-Gtkmm/src/window.cpp -o CMakeFiles/Calculator.dir/src/window.cpp.s
 
 # Object files for target Calculator
 Calculator_OBJECTS = \
-"CMakeFiles/Calculator.dir/main.cpp.o"
+"CMakeFiles/Calculator.dir/src/main.cpp.o" \
+"CMakeFiles/Calculator.dir/src/window.cpp.o"
 
 # External object files for target Calculator
 Calculator_EXTERNAL_OBJECTS =
 
-Calculator: CMakeFiles/Calculator.dir/main.cpp.o
+Calculator: CMakeFiles/Calculator.dir/src/main.cpp.o
+Calculator: CMakeFiles/Calculator.dir/src/window.cpp.o
 Calculator: CMakeFiles/Calculator.dir/build.make
 Calculator: CMakeFiles/Calculator.dir/compiler_depend.ts
 Calculator: CMakeFiles/Calculator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Calculator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kosmo/Pulpit/Calculator-Gtkmm/out/build/GCC-DEBUG/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Calculator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Calculator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -2,7 +2,8 @@ Calculator: \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
-  CMakeFiles/Calculator.dir/main.cpp.o \
+  CMakeFiles/Calculator.dir/src/main.cpp.o \
+  CMakeFiles/Calculator.dir/src/window.cpp.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libgtkmm-4.0.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libpangomm-2.48.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libgiomm-2.68.so \
@@ -220,7 +221,9 @@ Calculator: \
 
 /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o:
 
-CMakeFiles/Calculator.dir/main.cpp.o:
+CMakeFiles/Calculator.dir/src/main.cpp.o:
+
+CMakeFiles/Calculator.dir/src/window.cpp.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libgtkmm-4.0.so:
 

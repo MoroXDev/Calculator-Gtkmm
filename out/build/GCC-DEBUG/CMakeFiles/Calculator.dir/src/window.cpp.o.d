@@ -1,5 +1,7 @@
-CMakeFiles/Calculator.dir/main.cpp.o: \
- /home/kosmo/Pulpit/Calculator-Gtkmm/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/Calculator.dir/src/window.cpp.o: \
+ /home/kosmo/Pulpit/Calculator-Gtkmm/src/window.cpp \
+ /usr/include/stdc-predef.h \
+ /home/kosmo/Pulpit/Calculator-Gtkmm/src/window.h \
  /usr/include/gtkmm-4.0/gtkmm/window.h \
  /usr/include/glibmm-2.68/glibmm/ustring.h \
  /usr/lib/x86_64-linux-gnu/glibmm-2.68/include/glibmmconfig.h \
@@ -191,8 +193,12 @@ CMakeFiles/Calculator.dir/main.cpp.o: \
  /usr/include/c++/14/cstddef /usr/include/c++/14/utility \
  /usr/include/c++/14/bits/stl_relops.h \
  /usr/include/c++/14/bits/stl_pair.h /usr/include/c++/14/bits/move.h \
- /usr/include/c++/14/bits/utility.h /usr/include/c++/14/initializer_list \
- /usr/include/c++/14/iosfwd /usr/include/c++/14/bits/requires_hosted.h \
+ /usr/include/c++/14/bits/utility.h /usr/include/c++/14/compare \
+ /usr/include/c++/14/concepts /usr/include/c++/14/initializer_list \
+ /usr/include/c++/14/ext/numeric_traits.h \
+ /usr/include/c++/14/bits/cpp_type_traits.h \
+ /usr/include/c++/14/ext/type_traits.h /usr/include/c++/14/iosfwd \
+ /usr/include/c++/14/bits/requires_hosted.h \
  /usr/include/c++/14/bits/stringfwd.h \
  /usr/include/c++/14/bits/memoryfwd.h /usr/include/c++/14/bits/postypes.h \
  /usr/include/c++/14/cwchar /usr/include/wchar.h \
@@ -204,13 +210,16 @@ CMakeFiles/Calculator.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
  /usr/include/c++/14/iterator \
  /usr/include/c++/14/bits/stl_iterator_base_types.h \
+ /usr/include/c++/14/bits/iterator_concepts.h \
+ /usr/include/c++/14/bits/ptr_traits.h \
+ /usr/include/c++/14/bits/ranges_cmp.h \
  /usr/include/c++/14/bits/stl_iterator_base_funcs.h \
  /usr/include/c++/14/bits/concept_check.h \
  /usr/include/c++/14/debug/assertions.h \
- /usr/include/c++/14/bits/stl_iterator.h \
- /usr/include/c++/14/bits/cpp_type_traits.h \
- /usr/include/c++/14/ext/type_traits.h \
- /usr/include/c++/14/bits/ptr_traits.h \
+ /usr/include/c++/14/bits/stl_iterator.h /usr/include/c++/14/new \
+ /usr/include/c++/14/bits/exception.h \
+ /usr/include/c++/14/bits/exception_defines.h \
+ /usr/include/c++/14/bits/stl_construct.h \
  /usr/include/c++/14/bits/stream_iterator.h \
  /usr/include/c++/14/debug/debug.h \
  /usr/include/c++/14/bits/streambuf_iterator.h \
@@ -227,26 +236,23 @@ CMakeFiles/Calculator.dir/main.cpp.o: \
  /usr/include/c++/14/bits/char_traits.h \
  /usr/include/c++/14/bits/allocator.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/c++allocator.h \
- /usr/include/c++/14/bits/new_allocator.h /usr/include/c++/14/new \
- /usr/include/c++/14/bits/exception.h \
+ /usr/include/c++/14/bits/new_allocator.h \
  /usr/include/c++/14/bits/functexcept.h \
- /usr/include/c++/14/bits/exception_defines.h \
  /usr/include/c++/14/bits/ostream_insert.h \
  /usr/include/c++/14/bits/cxxabi_forced.h \
  /usr/include/c++/14/bits/stl_function.h \
  /usr/include/c++/14/backward/binders.h \
- /usr/include/c++/14/ext/numeric_traits.h \
  /usr/include/c++/14/bits/stl_algobase.h \
  /usr/include/c++/14/bits/predefined_ops.h /usr/include/c++/14/bit \
- /usr/include/c++/14/concepts /usr/include/c++/14/bits/refwrap.h \
- /usr/include/c++/14/bits/invoke.h \
+ /usr/include/c++/14/bits/refwrap.h /usr/include/c++/14/bits/invoke.h \
  /usr/include/c++/14/bits/range_access.h \
  /usr/include/c++/14/bits/basic_string.h \
  /usr/include/c++/14/ext/alloc_traits.h \
- /usr/include/c++/14/bits/alloc_traits.h \
- /usr/include/c++/14/bits/stl_construct.h /usr/include/c++/14/string_view \
+ /usr/include/c++/14/bits/alloc_traits.h /usr/include/c++/14/string_view \
  /usr/include/c++/14/bits/functional_hash.h \
  /usr/include/c++/14/bits/hash_bytes.h \
+ /usr/include/c++/14/bits/ranges_base.h \
+ /usr/include/c++/14/bits/max_size_type.h /usr/include/c++/14/numbers \
  /usr/include/c++/14/bits/string_view.tcc \
  /usr/include/c++/14/ext/string_conversions.h /usr/include/c++/14/cstdio \
  /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
@@ -259,6 +265,7 @@ CMakeFiles/Calculator.dir/main.cpp.o: \
  /usr/include/c++/14/bits/memory_resource.h \
  /usr/include/c++/14/bits/uses_allocator.h \
  /usr/include/c++/14/bits/uses_allocator_args.h /usr/include/c++/14/tuple \
+ /usr/include/c++/14/bits/ranges_util.h \
  /usr/include/c++/14/bits/locale_classes.tcc \
  /usr/include/c++/14/system_error \
  /usr/include/x86_64-linux-gnu/c++/14/bits/error_constants.h \
@@ -304,7 +311,16 @@ CMakeFiles/Calculator.dir/main.cpp.o: \
  /usr/include/c++/14/bits/shared_ptr_atomic.h \
  /usr/include/c++/14/bits/atomic_base.h \
  /usr/include/c++/14/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/14/bits/atomic_wait.h /usr/include/c++/14/cstdint \
+ /usr/include/c++/14/climits /usr/include/syscall.h \
+ /usr/include/x86_64-linux-gnu/sys/syscall.h \
+ /usr/lib/linux/uapi/x86/asm/unistd.h \
+ /usr/lib/linux/uapi/x86/asm/unistd_64.h \
+ /usr/include/x86_64-linux-gnu/bits/syscall.h \
+ /usr/include/c++/14/bits/std_mutex.h \
  /usr/include/c++/14/backward/auto_ptr.h \
+ /usr/include/c++/14/bits/ranges_uninitialized.h \
+ /usr/include/c++/14/bits/ranges_algobase.h \
  /usr/include/c++/14/pstl/glue_memory_defs.h \
  /usr/include/c++/14/pstl/execution_defs.h \
  /usr/include/sigc++-3.0/sigc++/type_traits.h \
@@ -321,7 +337,6 @@ CMakeFiles/Calculator.dir/main.cpp.o: \
  /usr/include/c++/14/bits/stl_vector.h \
  /usr/include/c++/14/bits/stl_bvector.h \
  /usr/include/c++/14/bits/vector.tcc /usr/include/c++/14/array \
- /usr/include/c++/14/compare \
  /usr/include/sigc++-3.0/sigc++/adaptors/adaptor_trait.h \
  /usr/include/sigc++-3.0/sigc++/functors/functor_trait.h \
  /usr/include/sigc++-3.0/sigc++/functors/mem_fun.h \
@@ -352,6 +367,7 @@ CMakeFiles/Calculator.dir/main.cpp.o: \
  /usr/include/c++/14/bits/algorithmfwd.h \
  /usr/include/c++/14/bits/stl_heap.h \
  /usr/include/c++/14/bits/uniform_int_dist.h \
+ /usr/include/c++/14/bits/ranges_algo.h \
  /usr/include/c++/14/pstl/glue_algorithm_defs.h \
  /usr/include/sigc++-3.0/sigc++/functors/functors.h \
  /usr/include/glibmm-2.68/glibmm/object.h \
@@ -1134,55 +1150,32 @@ CMakeFiles/Calculator.dir/main.cpp.o: \
  /usr/include/gtkmm-4.0/gtkmm/root.h \
  /usr/include/gtkmm-4.0/gtkmm/shortcutmanager.h \
  /usr/include/gtkmm-4.0/gtkmm/windowgroup.h \
- /usr/include/gtkmm-4.0/gtkmm/application.h \
- /usr/include/giomm-2.68/giomm/application.h \
- /usr/include/giomm-2.68/giomm/actionmap.h \
- /usr/include/giomm-2.68/giomm/simpleaction.h \
- /usr/include/giomm-2.68/giomm/action.h \
- /usr/include/giomm-2.68/giomm/applicationcommandline.h \
- /usr/include/giomm-2.68/giomm/file.h \
- /usr/include/giomm-2.68/giomm/fileattributeinfolist.h \
- /usr/include/giomm-2.68/giomm/fileattributeinfo.h \
- /usr/include/giomm-2.68/giomm/fileenumerator.h \
- /usr/include/glibmm-2.68/glibmm/priorities.h \
- /usr/include/giomm-2.68/giomm/fileinfo.h \
- /usr/include/glibmm-2.68/glibmm/datetime.h \
- /usr/include/glibmm-2.68/glibmm/timezone.h \
- /usr/include/giomm-2.68/giomm/fileinputstream.h \
- /usr/include/giomm-2.68/giomm/inputstream.h \
- /usr/include/giomm-2.68/giomm/seekable.h \
- /usr/include/glibmm-2.68/glibmm/iochannel.h \
- /usr/include/giomm-2.68/giomm/fileiostream.h \
- /usr/include/giomm-2.68/giomm/iostream.h \
- /usr/include/giomm-2.68/giomm/outputstream.h \
- /usr/include/giomm-2.68/giomm/filemonitor.h \
- /usr/include/giomm-2.68/giomm/fileoutputstream.h \
- /usr/include/giomm-2.68/giomm/mountoperation.h \
- /usr/include/giomm-2.68/giomm/drive.h \
- /usr/include/giomm-2.68/giomm/mount.h \
- /usr/include/giomm-2.68/giomm/error.h \
- /usr/include/glibmm-2.68/glibmm/variantdict.h \
- /usr/include/glibmm-2.68/glibmm/optionentry.h \
- /usr/include/glibmm-2.68/glibmm/optiongroup.h \
- /usr/include/giomm-2.68/giomm/dbusconnection.h \
- /usr/include/giomm-2.68/giomm/initable.h \
- /usr/include/giomm-2.68/giomm/asyncinitable.h \
- /usr/include/giomm-2.68/giomm/dbusauthobserver.h \
- /usr/include/giomm-2.68/giomm/credentials.h \
- /usr/include/giomm-2.68/giomm/dbusmethodinvocation.h \
- /usr/include/giomm-2.68/giomm/dbusmessage.h \
- /usr/include/giomm-2.68/giomm/unixfdlist.h \
- /usr/include/giomm-2.68/giomm/dbusintrospection.h \
- /usr/include/giomm-2.68/giomm/dbussubtreevtable.h \
- /usr/include/giomm-2.68/giomm/dbusinterfacevtable.h \
- /usr/include/giomm-2.68/giomm/notification.h \
- /usr/include/giomm-2.68/giomm/menumodel.h \
- /usr/include/giomm-2.68/giomm/menu.h \
- /usr/include/giomm-2.68/giomm/menuitem.h \
+ /usr/include/gtkmm-4.0/gtkmm/grid.h \
+ /usr/include/gtkmm-4.0/gtkmm/orientable.h \
  /usr/include/gtkmm-4.0/gtkmm/button.h \
  /usr/include/gtkmm-4.0/gtkmm/actionable.h \
- /usr/include/gtkmm-4.0/gtkmm/box.h \
- /usr/include/gtkmm-4.0/gtkmm/orientable.h \
- /usr/include/gtkmm-4.0/gtkmm/frame.h \
- /usr/include/gtkmm-4.0/gtkmm/papersize.h \
- /usr/include/glibmm-2.68/glibmm/keyfile.h /usr/include/c++/14/iostream
+ /usr/include/gtkmm-4.0/gtkmm/entry.h \
+ /usr/include/gtkmm-4.0/gtkmm/editable.h \
+ /usr/include/gtkmm-4.0/gtkmm/celleditable.h \
+ /usr/include/gtkmm-4.0/gtkmm/entrycompletion.h \
+ /usr/include/gtkmm-4.0/gtkmm/celllayout.h \
+ /usr/include/gtkmm-4.0/gtkmm/cellrenderer.h \
+ /usr/include/gtkmm-4.0/gtkmm/cellrenderer_generation.h \
+ /usr/include/gtkmm-4.0/gtkmm/cellrenderertext.h \
+ /usr/include/gtkmm-4.0/gtkmm/cellrendererpixbuf.h \
+ /usr/include/gtkmm-4.0/gdkmm/pixbuf.h \
+ /usr/include/gtkmm-4.0/gdkmm/pixbufformat.h \
+ /usr/include/giomm-2.68/giomm/inputstream.h \
+ /usr/include/glibmm-2.68/glibmm/priorities.h \
+ /usr/include/giomm-2.68/giomm/loadableicon.h \
+ /usr/include/gtkmm-4.0/gtkmm/cellrenderertoggle.h \
+ /usr/include/gtkmm-4.0/gtkmm/cellrendereraccel.h \
+ /usr/include/gtkmm-4.0/gtkmm/accelkey.h \
+ /usr/include/gtkmm-4.0/gtkmm/treemodel.h \
+ /usr/include/gtkmm-4.0/gtkmm/treeiter.h \
+ /usr/include/gtkmm-4.0/gtkmm/treemodelcolumn.h \
+ /usr/include/gtkmm-4.0/gtkmm/image.h \
+ /usr/include/gtkmm-4.0/gtkmm/entrybuffer.h \
+ /usr/include/giomm-2.68/giomm/menumodel.h \
+ /usr/include/gtkmm-4.0/gtkmm/box.h /usr/include/c++/14/ranges \
+ /usr/include/c++/14/span /usr/include/c++/14/iostream

@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/kosmo/Pulpit/Calculator-Gtkmm/main.cpp" "CMakeFiles/Calculator.dir/main.cpp.o" "gcc" "CMakeFiles/Calculator.dir/main.cpp.o.d"
+  "/home/kosmo/Pulpit/Calculator-Gtkmm/src/main.cpp" "CMakeFiles/Calculator.dir/src/main.cpp.o" "gcc" "CMakeFiles/Calculator.dir/src/main.cpp.o.d"
+  "/home/kosmo/Pulpit/Calculator-Gtkmm/src/window.cpp" "CMakeFiles/Calculator.dir/src/window.cpp.o" "gcc" "CMakeFiles/Calculator.dir/src/window.cpp.o.d"
   "" "Calculator" "gcc" "CMakeFiles/Calculator.dir/link.d"
   )
 
