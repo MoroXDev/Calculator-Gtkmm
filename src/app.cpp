@@ -2,11 +2,31 @@
 #include <ranges>
 #include <iostream>
 #include <algorithm>
+#include "exprtk.hpp"
 
-void MyWindow::insert_sign(Gtk::Button &button)
+void MyWindow::insert_text(const Glib::ustring &text)
 {
   int pos = input_entry.get_text_length();
-  input_entry.insert_text(button.get_label(), -1, pos);
+  input_entry.insert_text(text, -1, pos);
+  text_size_before_change = input_entry.get_text_length();
+}
+
+void MyWindow::insert_sign(const gunichar &sign)
+{
+  insert_text(Glib::ustring(1, sign));
+  text_size_before_change = input_entry.get_text_length();
+}
+
+void MyWindow::set_text(const Glib::ustring &text)
+{
+  input_entry.set_text(text);
+  text_size_before_change = input_entry.get_text_length();
+}
+
+void MyWindow::remove_sign(int pos)
+{
+  input_entry.delete_text(pos - 1, pos);
+  text_size_before_change = input_entry.get_text_length();
 }
 
 void MyWindow::manage_valid_signs_handler(Gtk::Button &button)
@@ -17,21 +37,29 @@ void MyWindow::manage_valid_signs_handler(Gtk::Button &button)
   {
     int text_length = input_entry.get_text_length();
     input_entry.delete_text(std::max(0, text_length - 1), text_length);
+    text_size_before_change = input_entry.get_text_length();
   }
   else if (sign_str == "=")
   {
-    print_result();
+    std::string expr_result = calculate_expr_result();
+    append_history(expr_result);
+    print_result(expr_result);
   }
   else if (sign_str == "AC")
   {
-    input_entry.set_text("");
+    set_text("");
   }
-
-  if (sign_str.length() == 1)
+  else if (sign_str == "mod")
+  {
+    const int mod_length = 5;
+    insert_text("mod()");
+    //    input_entry.set_position(pos + mod_length - 1);
+  }
+  else if (sign_str.length() == 1)
   {
     // use of sign_str as single char
     if (std::ranges::find(valid_signs, sign_str[0]) != valid_signs.end())
-      insert_sign(button);
+      insert_text(button.get_label());
   }
   input_entry_connection.unblock();
 }
@@ -39,47 +67,88 @@ void MyWindow::manage_valid_signs_handler(Gtk::Button &button)
 void MyWindow::filter_input_handler()
 {
   int cursor_pos = input_entry.get_position();
-
-  if (input_entry.get_text_length() == 0 || cursor_pos == 0)
+  gunichar sign = input_entry.get_text()[cursor_pos - 1];
+  std::cout << "zmiana" << std::endl;
+  if (text_size_before_change > input_entry.get_text_length())
   {
-    input_entry_connection.unblock();
+    std::cout << "blocked " << char(sign) << std::endl;
+    text_size_before_change = input_entry.get_text_length();
     return;
   }
 
-  gunichar sign = input_entry.get_text()[cursor_pos - 1];
-
   if (std::ranges::find(valid_signs, sign) == valid_signs.end())
   {
+    std::cout << "before remove " << char(sign) << cursor_pos << std::endl;
     invalid_insertions.push_back({sign, cursor_pos});
     Glib::signal_idle().connect_once(sigc::mem_fun(*this, &MyWindow::remove_or_change_sign));
   }
+
+  text_size_before_change = input_entry.get_text_length();
 }
 
-void MyWindow::print_result()
+void MyWindow::expr_result_handler()
 {
+  std::string expr_result = calculate_expr_result();
+  append_history(expr_result);
+  print_result(expr_result);
+}
+
+void MyWindow::print_result(std::string expr_result)
+{
+  if (expr_result == "nan")
+    return;
+  set_text(expr_result);
+  input_entry.set_position(expr_result.size());
+}
+
+std::string MyWindow::calculate_expr_result()
+{
+  Glib::ustring expr_text = input_entry.get_text();
+  int pos = 0;
+  while ((pos = expr_text.find('%', pos)) != Glib::ustring::npos)
+  {
+    expr_text.erase(pos);
+    insert_text("/100");
+  }
+
   exprtk::expression<double> expr;
-  expr_parser.compile(input_entry.get_text(), expr);
-  result_label.set_text(std::to_string(expr.value()));
+  expr_parser.compile(expr_text, expr);
+  std::string result = std::to_string(expr.value());
+
+  while (result.ends_with('0')) // remove zeros after '.'
+    result.erase(result.end() - 1);
+  if (result.ends_with('.'))
+    result.erase(result.end() - 1);
+  return result;
+}
+
+void MyWindow::append_history(std::string expr_result)
+{
+  history_label.set_text(history_label.get_text() + "\n" + input_entry.get_text() + " = " + expr_result);
 }
 
 void MyWindow::remove_or_change_sign()
 {
   input_entry_connection.block();
-  for (auto &ins : invalid_insertions)
+
+  for (auto ins = invalid_insertions.rbegin(); ins != invalid_insertions.rend(); ++ins)
   {
-    if (input_entry.get_text()[ins.cursor_pos - 1] == ins.sign)
+    std::cout << "after remove " << char(ins->sign) << std::endl;
+    if (input_entry.get_text()[ins->cursor_pos - 1] == ins->sign)
     {
-      if (ins.sign == 'x')
+      if (ins->sign == 'x')
       {
-        int pos = ins.cursor_pos - 1;
-        input_entry.delete_text(ins.cursor_pos - 1, ins.cursor_pos);
-        input_entry.insert_text("*", 1, pos);
-        input_entry.set_position(ins.cursor_pos);
+        int pos = ins->cursor_pos - 1;
+        remove_sign(ins->cursor_pos);
+        insert_text("*");
+        input_entry.set_position(ins->cursor_pos);
       }
       else
-        input_entry.delete_text(ins.cursor_pos - 1, ins.sign);
+        remove_sign(ins->cursor_pos);
     }
+    invalid_insertions.clear();
   }
+
   input_entry_connection.unblock();
 }
 
@@ -88,7 +157,7 @@ MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
   set_title("Calculator");
   set_default_size(300, 500);
 
-  Glib::ustring signs[4][5] = {{"⌫", "7", "4", "1", "+\\-"}, {"AC", "8", "5", "2", "0"}, {"%", "9", "6", "3", "."}, {"/", "x", "-", "+", "="}};
+  Glib::ustring signs[5][5] = {{"⌫", "7", "4", "1", "+\\-"}, {"AC", "8", "5", "2", "0"}, {"%", "9", "6", "3", "."}, {"/", "x", "-", "+", "="}, {"π", "√", "x²", "mod", "="}};
 
   buttons_grid.set_row_spacing(10);
   buttons_grid.set_column_spacing(10);
@@ -106,13 +175,14 @@ MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
   }
 
   //  input_entry_connection = input_entry.signal_changed().connect(sigc::mem_fun(*this, &MyWindow::filter_input_once_handler));
-  input_entry.signal_changed().connect(sigc::mem_fun(*this, &MyWindow::filter_input_handler));
-  input_entry.signal_activate().connect(sigc::mem_fun(*this, &MyWindow::print_result));
+  input_entry_connection = input_entry.signal_changed().connect(sigc::mem_fun(*this, &MyWindow::filter_input_handler));
+  input_entry.signal_activate().connect(sigc::mem_fun(*this, &MyWindow::expr_result_handler));
 
-  result_label = Gtk::Label("", Gtk::Align::END, Gtk::Align::END, false);
+  history_label = Gtk::Label("", Gtk::Align::START, Gtk::Align::END, false);
+  history_label.set_selectable(true);
 
   layout_box.set_valign(Gtk::Align::END);
-  layout_box.append(result_label);
+  layout_box.append(history_label);
   layout_box.append(input_entry);
   layout_box.append(buttons_grid);
 

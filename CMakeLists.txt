@@ -24,3 +24,4 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     ${GTKMM_LIBRARIES}  )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src)
+target_precompile_headers(${PROJECT_NAME} PRIVATE <exprtk.hpp>)
