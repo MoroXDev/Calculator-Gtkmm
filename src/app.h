@@ -19,16 +19,21 @@ struct Insertion
 
 class MyWindow : public Gtk::Window
 {
+  Glib::RefPtr<Gtk::CssProvider> css_provider;
   int text_size_before_change = 0;
-  const std::array<gunichar, 18> valid_signs = {'%', '-', '+', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '/', '*', '^'};
+  static constexpr int grid_spacing = 10;
+  const std::array<gunichar, 20> valid_signs = {'%', '-', '+', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '/', '*', '^', '(', ')'};
   std::vector<Insertion> invalid_insertions;
 
   exprtk::parser<double> expr_parser;
 
+  Gtk::Box upper_box;
+  Gtk::Box bottom_box;
   Gtk::Box layout_box;
 
   Gtk::Grid buttons_grid;
   Gtk::Button buttons[5][5];
+  Gtk::ToggleButton button_unsafe;
   Gtk::Entry input_entry;
   Gtk::Label history_label;
   sigc::connection input_entry_connection;
@@ -37,7 +42,7 @@ class MyWindow : public Gtk::Window
   void insert_text(const Glib::ustring &text);
   void set_text(const Glib::ustring &text);
   void remove_sign(int pos);
-  void manage_valid_signs_handler(Gtk::Button &button);
+  void manage_button_input_handler(Gtk::Button &button);
 
   void filter_input_handler();
 
@@ -48,9 +53,6 @@ class MyWindow : public Gtk::Window
   void append_history(std::string expr_result);
 
   void remove_or_change_sign();
-
-  Glib::ustring make_expression_valid(Glib::ustring expr);
-
 public:
   MyWindow();
 };

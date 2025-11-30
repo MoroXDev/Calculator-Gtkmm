@@ -29,7 +29,7 @@ void MyWindow::remove_sign(int pos)
   text_size_before_change = input_entry.get_text_length();
 }
 
-void MyWindow::manage_valid_signs_handler(Gtk::Button &button)
+void MyWindow::manage_button_input_handler(Gtk::Button &button)
 {
   input_entry_connection.block();
   Glib::ustring sign_str = button.get_label();
@@ -51,9 +51,28 @@ void MyWindow::manage_valid_signs_handler(Gtk::Button &button)
   }
   else if (sign_str == "mod")
   {
-    const int mod_length = 5;
-    insert_text("mod()");
+    insert_text("mod(,)");
     //    input_entry.set_position(pos + mod_length - 1);
+  }
+  else if (sign_str == "√")
+  {
+    insert_text("root(,)");
+  }
+  else if (sign_str == "π")
+  {
+    insert_text("3.14");
+  }
+  else if (sign_str == "x²")
+  {
+    insert_text("pow(,)");
+  }
+  else if (sign_str == "logn")
+  {
+    insert_text("logn(,)");
+  }
+  else if (sign_str == "x")
+  {
+    insert_sign('*');
   }
   else if (sign_str.length() == 1)
   {
@@ -62,28 +81,6 @@ void MyWindow::manage_valid_signs_handler(Gtk::Button &button)
       insert_text(button.get_label());
   }
   input_entry_connection.unblock();
-}
-
-void MyWindow::filter_input_handler()
-{
-  int cursor_pos = input_entry.get_position();
-  gunichar sign = input_entry.get_text()[cursor_pos - 1];
-  std::cout << "zmiana" << std::endl;
-  if (text_size_before_change > input_entry.get_text_length())
-  {
-    std::cout << "blocked " << char(sign) << std::endl;
-    text_size_before_change = input_entry.get_text_length();
-    return;
-  }
-
-  if (std::ranges::find(valid_signs, sign) == valid_signs.end())
-  {
-    std::cout << "before remove " << char(sign) << cursor_pos << std::endl;
-    invalid_insertions.push_back({sign, cursor_pos});
-    Glib::signal_idle().connect_once(sigc::mem_fun(*this, &MyWindow::remove_or_change_sign));
-  }
-
-  text_size_before_change = input_entry.get_text_length();
 }
 
 void MyWindow::expr_result_handler()
@@ -124,16 +121,44 @@ std::string MyWindow::calculate_expr_result()
 
 void MyWindow::append_history(std::string expr_result)
 {
-  history_label.set_text(history_label.get_text() + "\n" + input_entry.get_text() + " = " + expr_result);
+  if (history_label.get_text().length() == 0)
+    history_label.set_text(history_label.get_text() + input_entry.get_text() + " = " + expr_result);
+  else
+    history_label.set_text(history_label.get_text() + "\n" + input_entry.get_text() + " = " + expr_result);
+}
+
+void MyWindow::filter_input_handler()
+{
+  if (button_unsafe.get_active())
+    return;
+
+  int cursor_pos = input_entry.get_position();
+  gunichar sign = input_entry.get_text()[cursor_pos - 1];
+  std::cout << "zmiana" << std::endl;
+  if (text_size_before_change > input_entry.get_text_length())
+  {
+    // std::cout << "blocked " << char(sign) << std::endl;
+    text_size_before_change = input_entry.get_text_length();
+    return;
+  }
+
+  if (std::ranges::find(valid_signs, sign) == valid_signs.end())
+  {
+    std::cout << "before remove " << char(sign) << cursor_pos << std::endl;
+    invalid_insertions.push_back({sign, cursor_pos});
+    Glib::signal_idle().connect_once(sigc::mem_fun(*this, &MyWindow::remove_or_change_sign));
+  }
+
+  text_size_before_change = input_entry.get_text_length();
 }
 
 void MyWindow::remove_or_change_sign()
 {
   input_entry_connection.block();
 
+  std::cout << "after remove " << std::endl;
   for (auto ins = invalid_insertions.rbegin(); ins != invalid_insertions.rend(); ++ins)
   {
-    std::cout << "after remove " << char(ins->sign) << std::endl;
     if (input_entry.get_text()[ins->cursor_pos - 1] == ins->sign)
     {
       if (ins->sign == 'x')
@@ -156,35 +181,61 @@ MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
 {
   set_title("Calculator");
   set_default_size(300, 500);
+  add_css_class("app");
 
-  Glib::ustring signs[5][5] = {{"⌫", "7", "4", "1", "+\\-"}, {"AC", "8", "5", "2", "0"}, {"%", "9", "6", "3", "."}, {"/", "x", "-", "+", "="}, {"π", "√", "x²", "mod", "="}};
+  Glib::ustring signs[5][5] = {{"⌫", "7", "4", "1", "+\\-"}, {"AC", "8", "5", "2", "0"}, {"%", "9", "6", "3", "."}, {"/", "x", "-", "+", "logn"}, {"π", "√", "x²", "mod", "="}};
 
-  buttons_grid.set_row_spacing(10);
-  buttons_grid.set_column_spacing(10);
-  buttons_grid.set_valign(Gtk::Align::END);
   buttons_grid.set_halign(Gtk::Align::CENTER);
+  buttons_grid.set_row_spacing(grid_spacing);
+  buttons_grid.set_column_spacing(grid_spacing);
+  buttons_grid.add_css_class("buttons_grid");
 
   for (int x = 0; x < std::size(buttons); x++)
   {
     for (int y = 0; y < std::size(buttons[x]); y++)
     {
       buttons[x][y].set_label(signs[x][y]);
+      buttons[x][y].signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::manage_button_input_handler), std::ref(buttons[x][y])));
       buttons_grid.attach(buttons[x][y], x, y, 1, 1);
-      buttons[x][y].signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::manage_valid_signs_handler), std::ref(buttons[x][y])));
+      buttons[x][y].add_css_class("grid_buttons");
     }
   }
+
+  button_unsafe.set_label("unsafe");
+  button_unsafe.set_tooltip_text("turns off key filter");
+  button_unsafe.add_css_class("button_unsafe");
 
   //  input_entry_connection = input_entry.signal_changed().connect(sigc::mem_fun(*this, &MyWindow::filter_input_once_handler));
   input_entry_connection = input_entry.signal_changed().connect(sigc::mem_fun(*this, &MyWindow::filter_input_handler));
   input_entry.signal_activate().connect(sigc::mem_fun(*this, &MyWindow::expr_result_handler));
+  input_entry.set_margin_bottom(grid_spacing);
+  input_entry.add_css_class("input_entry");
 
   history_label = Gtk::Label("", Gtk::Align::START, Gtk::Align::END, false);
   history_label.set_selectable(true);
+  history_label.add_css_class("history_label");
 
-  layout_box.set_valign(Gtk::Align::END);
-  layout_box.append(history_label);
-  layout_box.append(input_entry);
-  layout_box.append(buttons_grid);
+  bottom_box = Gtk::Box(Gtk::Orientation::VERTICAL);
+  bottom_box.set_valign(Gtk::Align::END);
+  bottom_box.set_vexpand();
+
+  upper_box = Gtk::Box(Gtk::Orientation::VERTICAL);
+  upper_box.set_valign(Gtk::Align::START);
+  upper_box.set_halign(Gtk::Align::START);
+  upper_box.set_vexpand();
+  // layout_box.set_valign(Gtk::Align::END);
+  upper_box.append(button_unsafe);
+  bottom_box.append(history_label);
+  bottom_box.append(input_entry);
+  bottom_box.append(buttons_grid);
+
+  layout_box = Gtk::Box(Gtk::Orientation::VERTICAL);
+  layout_box.append(upper_box);
+  layout_box.append(bottom_box);
 
   set_child(layout_box);
+
+  css_provider = Gtk::CssProvider::create();
+  css_provider->load_from_path("src/style.css");
+  Gtk::StyleProvider::add_provider_for_display(get_display(), css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
 }
