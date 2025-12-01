@@ -10,10 +10,29 @@ void MyWindow::insert_text(const Glib::ustring &text)
   input_entry.insert_text(text, -1, pos);
   text_size_before_change = input_entry.get_text_length();
 }
+void MyWindow::insert_text_at(const Glib::ustring &text, int pos)
+{
+  input_entry.insert_text(text, -1, pos);
+  text_size_before_change = input_entry.get_text_length();
+}
 
 void MyWindow::insert_sign(const gunichar &sign)
 {
   insert_text(Glib::ustring(1, sign));
+  text_size_before_change = input_entry.get_text_length();
+}
+
+void MyWindow::insert_sign_at(const gunichar &sign, int pos)
+{
+  insert_text_at(Glib::ustring(1, sign), pos);
+  text_size_before_change = input_entry.get_text_length();
+}
+
+void MyWindow::replace_sign_at(const gunichar &sign, int pos)
+{
+  input_entry.delete_text(pos, pos + 1); 
+  input_entry.insert_text(Glib::ustring(1, sign), 1, pos);
+  input_entry.set_position(pos);
   text_size_before_change = input_entry.get_text_length();
 }
 
@@ -51,24 +70,23 @@ void MyWindow::manage_button_input_handler(Gtk::Button &button)
   }
   else if (sign_str == "mod")
   {
-    insert_text("mod(,)");
-    //    input_entry.set_position(pos + mod_length - 1);
+    insert_text("mod(dividend,divisor)");
   }
   else if (sign_str == "√")
   {
-    insert_text("root(,)");
+    insert_text("root(radicand, index)");
   }
   else if (sign_str == "π")
   {
     insert_text("3.14");
   }
-  else if (sign_str == "x²")
+  else if (sign_str == "xⁿ")
   {
-    insert_text("pow(,)");
+    insert_text("pow(base,exponent)");
   }
   else if (sign_str == "logn")
   {
-    insert_text("logn(,)");
+    insert_text("logn(value, base)");
   }
   else if (sign_str == "x")
   {
@@ -103,11 +121,9 @@ std::string MyWindow::calculate_expr_result()
   Glib::ustring expr_text = input_entry.get_text();
   int pos = 0;
   while ((pos = expr_text.find('%', pos)) != Glib::ustring::npos)
-  {
-    expr_text.erase(pos);
-    insert_text("/100");
-  }
+    expr_text.replace(pos, 1, "/100");
 
+  std::cout << expr_text << std::endl;
   exprtk::expression<double> expr;
   expr_parser.compile(expr_text, expr);
   std::string result = std::to_string(expr.value());
@@ -164,9 +180,9 @@ void MyWindow::remove_or_change_sign()
       if (ins->sign == 'x')
       {
         int pos = ins->cursor_pos - 1;
-        remove_sign(ins->cursor_pos);
-        insert_text("*");
-        input_entry.set_position(ins->cursor_pos);
+        replace_sign_at('*', pos);
+
+        std::cout << "XXXXXX" << std::endl;
       }
       else
         remove_sign(ins->cursor_pos);
@@ -183,7 +199,7 @@ MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
   set_default_size(300, 500);
   add_css_class("app");
 
-  Glib::ustring signs[5][5] = {{"⌫", "7", "4", "1", "+\\-"}, {"AC", "8", "5", "2", "0"}, {"%", "9", "6", "3", "."}, {"/", "x", "-", "+", "logn"}, {"π", "√", "x²", "mod", "="}};
+  Glib::ustring signs[5][5] = {{"⌫", "7", "4", "1", "+\\-"}, {"AC", "8", "5", "2", "0"}, {"%", "9", "6", "3", "."}, {"/", "x", "-", "+", "="}, {"π", "√", "xⁿ", "mod", "logn"}};
 
   buttons_grid.set_halign(Gtk::Align::CENTER);
   buttons_grid.set_row_spacing(grid_spacing);
