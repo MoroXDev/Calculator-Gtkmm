@@ -1,11 +1,6 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-// #include <gtkmm/window.h>
-// #include <gtkmm/grid.h>
-// #include <gtkmm/button.h>
-// #include <gtkmm/entry.h>
-// #include <gtkmm/box.h>
 #include <vector>
 #include <gtkmm.h>
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include "exprtk.hpp"
+#include "style.h"
 
 void MyWindow::insert_text(const Glib::ustring &text)
 {
@@ -252,6 +253,6 @@ MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
   set_child(layout_box);
 
   css_provider = Gtk::CssProvider::create();
-  css_provider->load_from_path("src/style.css");
+  css_provider->load_from_string(style);
   Gtk::StyleProvider::add_provider_for_display(get_display(), css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
 }
