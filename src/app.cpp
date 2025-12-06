@@ -196,8 +196,10 @@ void MyWindow::remove_or_change_sign()
 
 MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
 {
+  int win_w = 300;
+  int win_h = 500;
   set_title("Calculator");
-  set_default_size(300, 500);
+  set_default_size(win_w, win_h);
   add_css_class("app");
 
   Glib::ustring signs[5][5] = {{"⌫", "7", "4", "1", "+\\-"}, {"AC", "8", "5", "2", "0"}, {"%", "9", "6", "3", "."}, {"/", "x", "-", "+", "="}, {"π", "√", "xⁿ", "mod", "logn"}};
@@ -206,6 +208,8 @@ MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
   buttons_grid.set_row_spacing(grid_spacing);
   buttons_grid.set_column_spacing(grid_spacing);
   buttons_grid.add_css_class("buttons_grid");
+  buttons_grid.set_row_homogeneous();
+  buttons_grid.set_size_request(300);
 
   for (int x = 0; x < std::size(buttons); x++)
   {
@@ -215,12 +219,14 @@ MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
       buttons[x][y].signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::manage_button_input_handler), std::ref(buttons[x][y])));
       buttons_grid.attach(buttons[x][y], x, y, 1, 1);
       buttons[x][y].add_css_class("grid_buttons");
+      buttons[x][y].set_hexpand();
     }
   }
 
   button_unsafe.set_label("unsafe");
   button_unsafe.set_tooltip_text("turns off key filter");
   button_unsafe.add_css_class("button_unsafe");
+  button_unsafe.set_size_request(win_w * 0.25f);
 
   //  input_entry_connection = input_entry.signal_changed().connect(sigc::mem_fun(*this, &MyWindow::filter_input_once_handler));
   input_entry_connection = input_entry.signal_changed().connect(sigc::mem_fun(*this, &MyWindow::filter_input_handler));
@@ -254,5 +260,6 @@ MyWindow::MyWindow() : layout_box(Gtk::Orientation::VERTICAL, 10)
 
   css_provider = Gtk::CssProvider::create();
   css_provider->load_from_string(style);
+  // css_provider->load_from_path("src/style.css");
   Gtk::StyleProvider::add_provider_for_display(get_display(), css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
 }

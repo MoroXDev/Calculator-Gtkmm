@@ -1,3 +1,6 @@
+#ifndef STYLE_H
+#define STYLE_H
+
 #include <string>
 inline static std::string style = R"(
 .button_unsafe {
@@ -64,3 +67,4 @@ inline static std::string style = R"(
  border-radius: 3px;
 }
 )";
+#endif
